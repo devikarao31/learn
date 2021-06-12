@@ -3,7 +3,12 @@
     "name": "myproject",
     "slug": "myproject",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
+    "platforms":[
+      "ios",
+      "android",
+      "web"
+    ],
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
