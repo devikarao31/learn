@@ -1,40 +1,115 @@
-import * as React from 'react';
-import { Button, View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer,DarkTheme } from '@react-navigation/native';
+import React from 'react';
 
-import {DrawerS} from './screens/DrawerS' 
-import BookMark from './screens/BookMark';
-import Home from './screens/Home';
-import Settings from './screens/Settings';
+// import all the components we are going to use
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
+// 1. Either import the whole module
+import Communications from 'react-native-communications';
+/* 2. Or import single methods
+ import {
+  phonecall,
+  email,
+  text,
+  web
+} from 'react-native-communications';*/
 
-function HomeScreen({ navigation }) {
+const App = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        <Text style={styles.titleText}>
+          Make Phone Call, Send SMS or Email
+          Using React Native Communication
+        </Text>
+        {/* Call: phonecall(phoneNumber, prompt) */}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttonStyle}
+          onPress={
+            () => Communications.phonecall('0123456789',true)
+          }>
+          <Text style={styles.buttonTextStyle}>
+            Make Phone Call
+          </Text>
+        </TouchableOpacity>
+        {/* Mail: email(to, cc, bcc, subject, body) */}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttonStyle}
+          onPress={() =>
+            Communications.email(
+              [
+                'hidevikarao@gmail.com',
+                '4nm18cs037@nmamit.in'
+              ],
+              null,
+              null,
+              'Mail Practice',
+              'Jzt reply me back if u hav received',
+            )
+          }>
+          <Text style={styles.buttonTextStyle}>
+            Send an Email
+          </Text>
+        </TouchableOpacity>
+        {/* SMS: text(phoneNumber = null, body = null) */}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.buttonStyle}
+          onPress={() =>
+            Communications.text(
+              '0123456789',
+              'Follow https://aboutreact.com'
+            )
+          }>
+          <Text style={styles.buttonTextStyle}>
+            Send a Text/iMessage
+          </Text>
+        </TouchableOpacity>
+        {/* Web: web(address = null)*/}
+        <TouchableOpacity
+          activeOpacity={0.1}
+          style={styles.buttonStyle}
+          onPress={
+            () => Communications.web('https://aboutreact.com')
+          }>
+          <Text style={styles.buttonTextStyle}>
+            Open AboutReact
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
+export default App;
 
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <NavigationContainer theme={DarkTheme}>
-      <Drawer.Navigator initialRouteName="Home"
-        drawerContent={props => <DrawerS {...props}/>}
-      >
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="BookMark" component={BookMark} />
-        <Drawer.Screen name="Settings" component={Settings} />
-
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 10,
+  },
+  titleText: {
+    fontSize: 22,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  buttonStyle: {
+    justifyContent: 'center',
+    marginTop: 15,
+    padding: 10,
+    backgroundColor: 'yellow',
+  },
+  buttonTextStyle: {
+    color: 'orange',
+    textAlign: 'center',
+    fontSize:24
+  },
+});

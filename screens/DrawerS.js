@@ -10,8 +10,8 @@ import {Avatar,
         Caption
 } from 'react-native-paper'
 
-import Home from './Home'
-import BookMark from './BookMark'
+
+
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -19,7 +19,7 @@ import {DrawerContent, DrawerContentScrollView,DrawerItem} from '@react-navigati
 
 export const DrawerS = (props) => {
 
-    const [isDark,setIsDark]=useState(false)
+    const [isDark,setIsDark]=useState(false)  
 
     const toggleTheme=()=>{
         setIsDark(!isDark)
@@ -88,7 +88,7 @@ export const DrawerS = (props) => {
                         <TouchableRipple onPress={()=>{toggleTheme()}}>
                             <View style={styles.preference}>
                                 <Text>Dark Theme</Text>
-                                <Switch value={toggleTheme}/>
+                                <Switch />
                                 
                             </View>
                         </TouchableRipple>
